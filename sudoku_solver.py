@@ -24,15 +24,19 @@ def run():
             else:
                 print 'Please choose 1, 2, 3, or 4'
         if choice == '1':
+            print '\nChoose a file to read:'
+            print 'Type \'1\' to read easy.txt'
+            print 'Type \'2\' to read medium.txt'
+            print 'Type \'3\' to read hard.txt'
+            print 'Type \'4\' to read samurai.txt'
             while True:
-                filename = raw_input('\nWhat\'s the name of the file?\n')
-                if os.path.isfile(resource_path(filename)):
-                    sudoku = file_to_array(filename)
+                filenumber = raw_input('')
+                if filenumber in ['1', '2', '3', '4']:
                     break
-                elif not '.txt' in filename:
-                    print 'Filename should be *.txt'
                 else:
-                    print 'File does not exist.'
+                    print 'Please choose 1, 2, 3, or 4'
+            filename = resource_path(get_filename(filenumber))
+            sudoku = file_to_array(filename)
             print_puzzle_and_solution(sudoku)
             press_enter_to_start_over()
         elif choice == '2':
@@ -45,7 +49,7 @@ def run():
                 if difficulty in ['1','2','3']:
                     break
                 else:
-                    print 'Please choose 1, 2, or 3'
+                    print '\nPlease choose 1, 2, or 3'
             if difficulty == '1':
                 p_empty = 0.58
             elif difficulty == '2':
@@ -71,6 +75,17 @@ def print_puzzle_and_solution(sudoku):
 
 def press_enter_to_start_over():
     raw_input('Press enter to start over...')
+
+def get_filename(filenumber):
+    if filenumber == '1':
+        return 'easy.txt'
+    elif filenumber == '2':
+        return 'medium.txt'
+    elif filenumber == '3':
+        return 'hard.txt'
+    elif filenumber == '4':
+        return 'samurai.txt'
+    return None
 
 #################################
 #       Global variables        #
